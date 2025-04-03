@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyberpunk SEO AI Tools (Single File)</title>
+    <script async src="https://unpkg.com/es-module-shims@1.10.0/dist/es-module-shims.js"></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.163.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@0.163.0/examples/jsm/"
+        }
+      }
+    </script>
+
+    <style>
+        /* --- Paste neon-theme.css content here --- */
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400&display=swap');
+        /* ... (rest of neon-theme.css) ... */
+        :root {
+          --cyber-blue: #00f7ff; /* ... etc ... */
+        }
+        body { /* ... */ }
+        .card { /* ... */ }
+        /* ... (all styles from neon-theme.css) ... */
+
+
+        /* --- Paste three-overrides.css content here --- */
+        #bg-canvas {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          height: 100vh;
+          z-index: -1;
+          display: block;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="bg-canvas"></canvas>
+
+    <header>
+        <h1>SEO AI Tools // Grid Runner</h1>
+    </header>
+
+    <main>
+        <section id="tool-keyword-expander" class="card">
+            </section>
+        <section id="tool-article-generator" class="card">
+             </section>
+        <section id="tool-seo-analysis" class="card">
+             </section>
+        <div id="status-indicator" class="status-idle">
+             </div>
+    </main>
+
+    <footer>
+        <p>// System Online - AI Core Integrated //</p>
+    </footer>
+
+    <script type="module">
+        // --- Module Imports (using import map) ---
+        import * as THREE from 'three';
+
+        // --- AI Handler Class (Inline - Minified Concept) ---
+        // (Paste the content of AIProcessor class from ai-handler.js here)
+        // Note: No 'export' keyword needed when inlining directly
+        const CACHE_PREFIX = 'seo-ai-cache_';
+        const CACHE_EXPIRY_MS = 60 * 60 * 1000; // 1 hour
+
+        class AIProcessor {
+            constructor() {
+                this.HF_API_KEY = 'YOUR_HUGGINGFACE_API_KEY_HERE'; // <--- REPLACE
+                this.OLLAMA_MODEL = 'gemma:latest';
+                this.OLLAMA_ENDPOINT = 'http://localhost:11434/api/generate';
+                this.PROXY_ENDPOINT = '/api/ollama/generate'; // Use this on local dev w/ proxy
+                this.USE_PROXY = true; // Change if needed
+            }
+             // ... (Paste ALL methods: _getCacheKey, _getFromCache, _saveToCache, generateContent, _callHuggingFace, _callOllama) ...
+             _getCacheKey(endpoint, data) { /* ... */ }
+             _getFromCache(key) { /* ... */ }
+             _saveToCache(key, data) { /* ... */ }
+             async generateContent(hfModelEndpoint, ollamaPromptData, cacheDataKey) { /* ... */ }
+             async _callHuggingFace(model, inputs) { /* ... */ }
+             async _callOllama(model, data) { /* ... */ }
+        }
+
+
+        // --- Three.js Config (Inline) ---
+        // (Paste the content of three-config.js here)
+        // Note: No 'export' keyword, call initParticleBackground directly later
+        let scene, camera, renderer, particles, geometry, material;
+        let mouseX = 0, mouseY = 0;
+        const windowHalfX = window.innerWidth / 2;
+        const windowHalfY = window.innerHeight / 2;
+
+        function initParticleBackground(containerElementId = 'bg-canvas') {
+            // ... (Paste function content from three-config.js) ...
+             const canvas = document.getElementById(containerElementId);
+             /* ... setup scene, camera, renderer, particles ... */
+             scene = new THREE.Scene();
+             /* ... rest of the function ... */
+             animate(); // Start animation loop
+        }
+        function createParticleTexture() { /* ... */ }
+        function onDocumentMouseMove(event) { /* ... */ }
+        function onWindowResize() { /* ... */ }
+        function animate() { /* ... */ }
+
+
+        // --- Main App Logic (Inline) ---
+        // (Paste the content of app.js here)
+        // Note: Remove imports at the top, classes/functions are now globally available in this script scope (or defined above)
+
+        // --- DOM Elements ---
+        const keywordInput = document.getElementById('keyword-input');
+        // ... (define all other DOM elements) ...
+        const statusText = document.getElementById('status-text');
+
+
+        // --- Initialize Modules ---
+        initParticleBackground(); // Directly call the function defined above
+        const aiProcessor = new AIProcessor(); // Instantiate class defined above
+
+        // --- Voice Synthesis ---
+        const synth = window.speechSynthesis;
+        // ... (Paste voice synth logic) ...
+        function speak(text) { /* ... */ }
+
+        // --- UI Update Functions ---
+        function setLoadingState(buttonElement, outputArea, cardElement, isLoading, message = "AI Processing...") { /* ... */ }
+        function setResultState(outputArea, cardElement, result) { /* ... */ }
+
+
+        // --- Event Listeners ---
+        expandKeywordsBtn.addEventListener('click', async () => { /* ... */ });
+        generateArticleBtn.addEventListener('click', async () => { /* ... */ });
+        analyzeSeoBtn.addEventListener('click', async () => { /* ... */ });
+
+        // --- Initial Setup ---
+        loadVoices(); // Load voices for speech synth
+
+        console.log("Cyberpunk SEO AI Tools (Single File) Initialized.");
+
+    </script>
+</body>
+</html>

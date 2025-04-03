@@ -1,0 +1,281 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400&display=swap');
+
+:root {
+  --cyber-blue: #00f7ff;
+  --neon-pink: #ff00ff;
+  --matrix-green: #39ff14;
+  --dark-bg: #0a0a1f;
+  --light-text: #e0e0ff;
+  --glow-blur: 15px;
+  --border-width: 2px;
+
+  --gradient-start: #1a0a3a;
+  --gradient-mid: #0a0a1f;
+  --gradient-end: #3a0a1a;
+}
+
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 var(--glow-blur) var(--cyber-blue); border-color: var(--cyber-blue); }
+  50% { box-shadow: 0 0 calc(var(--glow-blur) * 1.5) calc(var(--glow-blur) / 3) var(--neon-pink); border-color: var(--neon-pink); }
+}
+
+@keyframes errorFlash {
+  0%, 100% { border-color: red; box-shadow: 0 0 10px red; }
+  50% { border-color: #ff6666; box-shadow: 0 0 20px #ff6666; }
+}
+
+@keyframes thinkingSpinner {
+    0% { transform: rotate(0deg); border-top-color: var(--cyber-blue); }
+    50% { border-top-color: var(--neon-pink); }
+    100% { transform: rotate(360deg); border-top-color: var(--cyber-blue); }
+}
+
+body {
+  background: linear-gradient(-45deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end));
+  background-size: 400% 400%;
+  animation: gradientAnimation 15s ease infinite;
+  color: var(--light-text);
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+#bg-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Behind everything */
+}
+
+header, footer {
+  text-align: center;
+  padding: 1em;
+  background: rgba(0, 0, 10, 0.7);
+  text-shadow: 0 0 8px var(--cyber-blue);
+  font-family: 'Orbitron', sans-serif;
+}
+
+header h1 {
+    margin: 0;
+    color: var(--cyber-blue);
+    text-shadow: 0 0 10px var(--cyber-blue), 0 0 20px var(--cyber-blue);
+}
+
+footer {
+  margin-top: auto; /* Push footer down */
+  font-size: 0.9em;
+  color: var(--matrix-green);
+  text-shadow: 0 0 5px var(--matrix-green);
+}
+
+
+main {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  position: relative; /* Needed for absolute positioning of status indicator */
+  z-index: 1; /* Above canvas */
+}
+
+.card {
+  background: rgba(10, 10, 31, 0.85); /* Slightly transparent dark bg */
+  border: var(--border-width) solid var(--cyber-blue);
+  box-shadow: 0 0 var(--glow-blur) var(--cyber-blue), inset 0 0 10px rgba(0, 247, 255, 0.3);
+  border-radius: 8px;
+  padding: 25px;
+  width: 90%;
+  max-width: 700px;
+  backdrop-filter: blur(3px);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  animation: glowPulse 5s infinite alternate; /* Subtle constant glow */
+}
+
+.card h2 {
+  color: var(--neon-pink);
+  text-shadow: 0 0 8px var(--neon-pink);
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-family: 'Orbitron', sans-serif;
+  border-bottom: 1px solid rgba(255, 0, 255, 0.4);
+  padding-bottom: 10px;
+}
+
+.input-group, .output-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--cyber-blue);
+  font-size: 0.9em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+input[type="text"], textarea {
+  width: calc(100% - 22px); /* Account for padding and border */
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid var(--matrix-green);
+  color: var(--light-text);
+  padding: 10px;
+  border-radius: 4px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1em;
+  box-shadow: inset 0 0 8px rgba(57, 255, 20, 0.3);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus, textarea:focus {
+  outline: none;
+  border-color: var(--neon-pink);
+  box-shadow: 0 0 10px var(--neon-pink), inset 0 0 8px rgba(255, 0, 255, 0.5);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+button {
+  background-color: transparent;
+  border: var(--border-width) solid var(--neon-pink);
+  color: var(--neon-pink);
+  padding: 10px 20px;
+  font-family: 'Orbitron', sans-serif;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px var(--neon-pink);
+  margin-top: 10px;
+  letter-spacing: 1px;
+}
+
+button:hover, button:focus {
+  background-color: var(--neon-pink);
+  color: var(--dark-bg);
+  box-shadow: 0 0 15px var(--neon-pink), 0 0 25px var(--neon-pink);
+  outline: none;
+}
+
+button:active {
+    transform: scale(0.98);
+    box-shadow: 0 0 5px var(--neon-pink);
+}
+
+/* Loading and Error States */
+.card.loading {
+    border-color: var(--matrix-green);
+    animation: glowPulse 1s infinite alternate, pulseBorder 1s infinite;
+}
+
+@keyframes pulseBorder {
+    0% { border-width: 2px; }
+    50% { border-width: 3px; }
+    100% { border-width: 2px; }
+}
+
+
+.card.error {
+  animation: errorFlash 0.8s infinite;
+}
+
+textarea.error-field {
+    border-color: red;
+    box-shadow: 0 0 10px red;
+}
+
+
+/* Status Indicator */
+#status-indicator {
+    position: fixed; /* Or absolute relative to main */
+    bottom: 20px;
+    right: 20px;
+    background: rgba(10, 10, 31, 0.9);
+    border: 1px solid var(--matrix-green);
+    padding: 10px 15px;
+    border-radius: 5px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 0 10px var(--matrix-green);
+    font-size: 0.9em;
+    transition: all 0.5s ease;
+    opacity: 0; /* Hidden by default */
+    visibility: hidden;
+}
+
+#status-indicator.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+#status-indicator .spinner {
+    width: 16px;
+    height: 16px;
+    border: 3px solid rgba(57, 255, 20, 0.3);
+    border-top-color: var(--matrix-green);
+    border-radius: 50%;
+    display: none; /* Hidden by default */
+}
+
+#status-indicator.loading .spinner {
+    display: block;
+    animation: thinkingSpinner 1s linear infinite;
+}
+
+#status-indicator.error {
+    border-color: red;
+    box-shadow: 0 0 10px red;
+    color: red;
+}
+
+#status-indicator.success {
+     border-color: var(--cyber-blue);
+     box-shadow: 0 0 10px var(--cyber-blue);
+     color: var(--cyber-blue);
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  main {
+    padding: 10px;
+  }
+  .card {
+    width: 95%;
+    padding: 15px;
+  }
+  h1 {
+    font-size: 1.8em;
+  }
+  h2 {
+    font-size: 1.3em;
+  }
+  button {
+      padding: 8px 15px;
+      font-size: 0.9em;
+  }
+  #status-indicator {
+      bottom: 10px;
+      right: 10px;
+      padding: 8px 12px;
+      font-size: 0.8em;
+  }
+}

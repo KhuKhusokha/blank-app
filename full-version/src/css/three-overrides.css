@@ -1,0 +1,12 @@
+/* Add any CSS needed to specifically style or position the Three.js canvas
+   or override its default behavior if necessary. */
+
+#bg-canvas {
+  position: fixed; /* Ensure it stays fixed */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1; /* Place behind all other content */
+  display: block; /* Override potential inline display */
+}

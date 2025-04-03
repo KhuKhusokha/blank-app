@@ -1,0 +1,25 @@
+{
+  "name": "seo-ai-tools",
+  "version": "1.0.0",
+  "description": "Cyberpunk themed SEO tools with AI integration",
+  "main": "full-version/index.html",
+  "scripts": {
+    "start:proxy": "node api/local-proxy.js",
+    "dev": "echo 'Open full-version/index.html in your browser. Run npm run start:proxy in a separate terminal if using Ollama.'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "seo",
+    "ai",
+    "huggingface",
+    "ollama",
+    "cyberpunk"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "http-proxy-middleware": "^3.0.0"
+  }
+}
